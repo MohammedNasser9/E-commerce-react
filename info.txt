@@ -1,0 +1,4 @@
+-Email
+    ecommerce-react@starpi.com
+-Password
+    E-Commerce2025
