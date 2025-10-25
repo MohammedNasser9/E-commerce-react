@@ -11,4 +11,4 @@ uploads/
 .env.local
 .env.production
 .env.development
-
+info.txt
