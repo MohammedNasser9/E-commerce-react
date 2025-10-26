@@ -10,6 +10,11 @@ export default function Hero() {
   //  Array for Swiper slides
   const slides = [
     {
+      image: "/watch.png",
+      title: "MEN-WOMEN",
+      sale: "45% OFF",
+    },
+    {
       image: "/banner-15.jpg",
       title: "MEN",
       sale: "30% OFF",
@@ -18,11 +23,6 @@ export default function Hero() {
       image: "/banner-25.jpg",
       title: "WOMEN",
       sale: "20% OFF",
-    },
-    {
-      image: "/watch.png",
-      title: "MEN-WOMEN",
-      sale: "45% OFF",
     },
   ];
 
