@@ -15,10 +15,6 @@ export default function AddToCartDialog({ open, handleClose, product }) {
   if (!product) return null;
 
   const { title, price, description, rating, image } = product;
-  // description array -> نص
-  const productDescription = description
-    .map((block) => block.children.map((child) => child.text).join(""))
-    .join("\n");
 
   // ✅ لو مفيش صور خالص fallback
   const images = image?.length
@@ -102,7 +98,7 @@ export default function AddToCartDialog({ open, handleClose, product }) {
               mt={2}
               sx={{ lineHeight: 1.6 }}
             >
-              {productDescription ||
+              {description ||
                 "High-quality product made with attention to detail."}
             </Typography>
 

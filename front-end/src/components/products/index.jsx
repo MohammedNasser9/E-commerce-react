@@ -146,10 +146,7 @@ export default function Products() {
         {filteredProducts.map((product) => {
           const { id, title, price, description, rating, Category, image } =
             product;
-          // description array -> نص
-          const productDescription = description
-            .map((block) => block.children.map((child) => child.text).join(""))
-            .join("\n");
+          
 
           // ✅ Build full image URL (since Strapi returns relative paths)
           const imageUrl = image?.[0]?.url
@@ -207,7 +204,7 @@ export default function Products() {
 
                 {/* 📝 Short Description */}
                 <Typography variant="body2" color="#9e9e9e" my={1}>
-                  {productDescription ||
+                  {description ||
                     "Premium quality product with modern design."}
                 </Typography>
 
