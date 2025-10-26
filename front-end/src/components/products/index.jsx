@@ -16,6 +16,9 @@ import {
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useState } from "react";
 
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "framer-motion";
+
 import AddToCartDialog from "./productModal";
 
 // 🧠 Importing the RTK Query hook
@@ -143,102 +146,126 @@ export default function Products() {
         }}
       >
         {/* 🧩 Render Products from API */}
-        {filteredProducts.map((product) => {
-          const { id, title, price, description, rating, Category, image } =
-            product;
-          
+        <AnimatePresence mode="popLayout">
+          {filteredProducts.map((product, index) => {
+            const { id, title, price, description, rating, image } = product;
 
-          // ✅ Build full image URL (since Strapi returns relative paths)
-          const imageUrl = image?.[0]?.url
-            ? `${image[0].url}`
-            : "https://via.placeholder.com/300x300?text=No+Image";
+            const imageUrl = image?.[0]?.url
+              ? `${image[0].url}`
+              : "https://via.placeholder.com/300x300?text=No+Image";
 
-          return (
-            // Product
-            <Card
-              key={id}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                borderRadius: 3,
-                overflow: "hidden",
-                boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
-                transition: "0.3s",
-                "&:hover": {
-                  transform: "translateY(-3px)",
-                  boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-                },
-              }}
-            >
-              {/* 🖼️ Product Image */}
-              <CardMedia
-                component="img"
-                height="250"
-                image={imageUrl}
-                alt={title}
-                sx={{ objectFit: "cover" }}
-              />
-
-              {/* 📦 Product Details */}
-              <CardContent
-                sx={{
-                  flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
+            return (
+              <motion.div
+              
+                key={id}
+                layout
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: {
+                    type: "spring",
+                    stiffness: 120,
+                    damping: 12,
+                    delay: index * 0.05,
+                  },
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -40,
+                  scale: 0.9,
+                  transition: { duration: 0.25 },
                 }}
               >
-                {/* 🏷️ Name + Price Row */}
-                <Stack
-                  direction={"row"}
-                  justifyContent={"space-between"}
-                  spacing={0.5}
+                <motion.div
+                
+                style={{height:'100%'}}
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0px 10px 20px rgba(0,0,0,0.15)",
+                    transition: { type: "spring", stiffness: 250 },
+                  }}
                 >
-                  <Typography fontSize={15} fontWeight={600}>
-                    {title}
-                  </Typography>
-                  <Typography color="primary" fontWeight={700}>
-                    ${price}
-                  </Typography>
-                </Stack>
-
-                {/* 📝 Short Description */}
-                <Typography variant="body2" color="#9e9e9e" my={1}>
-                  {description ||
-                    "Premium quality product with modern design."}
-                </Typography>
-
-                {/* ⚙️ Actions Row */}
-                <Stack
-                  direction={"row"}
-                  justifyContent={"space-between"}
-                  alignItems={"center"}
-                  flexWrap={"wrap"}
-                >
-                  {/* 🛒 Add to Cart */}
-                  <Button
-                    variant="text"
-                    startIcon={<AddShoppingCartIcon />}
-                    size="small"
-                    sx={{ mt: 1, textTransform: "capitalize", px: 1 }}
-                    onClick={() => handleOpenDialog(product)}
+                  <Card
+                 
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      borderRadius: 3,
+                      overflow: "hidden",
+                      boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+                      transition: "0.3s",
+                      height:'100%'
+                    }}
                   >
-                    Add to Cart
-                  </Button>
+                    <CardMedia
+                      component="img"
+                      height="250"
+                      image={imageUrl}
+                      alt={title}
+                      sx={{ objectFit: "cover" }}
+                    />
 
-                  {/* ⭐ Rating */}
-                  <Rating
-                    size="small"
-                    value={rating || 4}
-                    precision={0.5}
-                    readOnly
-                    sx={{ mt: 1 }}
-                  />
-                </Stack>
-              </CardContent>
-            </Card>
-          );
-        })}
+                    <CardContent
+                    
+                      sx={{
+                        flex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        spacing={0.5}
+                      >
+                        <Typography fontSize={15} fontWeight={600}>
+                          {title}
+                        </Typography>
+                        <Typography color="primary" fontWeight={700}>
+                          ${price}
+                        </Typography>
+                      </Stack>
+
+                      <Typography variant="body2" color="#9e9e9e" my={1}>
+                        {description ||
+                          "Premium quality product with modern design."}
+                      </Typography>
+
+                      <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        flexWrap="wrap"
+                      >
+                        <Button
+                          variant="text"
+                          startIcon={<AddShoppingCartIcon />}
+                          size="small"
+                          sx={{ mt: 1, textTransform: "capitalize", px: 1 }}
+                          onClick={() => handleOpenDialog(product)}
+                        >
+                          Add to Cart
+                        </Button>
+
+                        <Rating
+                          size="small"
+                          value={rating || 4}
+                          precision={0.5}
+                          readOnly
+                          sx={{ mt: 1 }}
+                        />
+                      </Stack>
+                    </CardContent>
+
+                  </Card>
+                </motion.div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
       </Box>
 
       <AddToCartDialog

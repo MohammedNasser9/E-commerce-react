@@ -82,71 +82,73 @@ export default function AddToCartDialog({ open, handleClose, product }) {
             justifyContent: "space-between",
           }}
         >
-          {/* 🧾 Product Info */}
-          <Box>
-            <Typography variant="h6" fontWeight={700}>
-              {title}
-            </Typography>
+          <Stack  justifyContent={'center'} sx={{height:'100%' , minHeight:'250px'}}>
+            <Box>
+              <Typography variant="h6" fontWeight={700}>
+                {title}
+              </Typography>
 
-            <Typography color="primary" fontWeight={600} fontSize={18} mt={1}>
-              ${price}
-            </Typography>
+              <Typography color="primary" fontWeight={600} fontSize={18} mt={.5}>
+                ${price}
+              </Typography>
 
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              mt={2}
-              sx={{ lineHeight: 1.6 }}
-            >
-              {description ||
-                "High-quality product made with attention to detail."}
-            </Typography>
-
-            <Rating
-              value={rating || 4}
-              precision={0.5}
-              readOnly
-              size="small"
-              sx={{ mt: 2 }}
-            />
-          </Box>
-
-          {/* 🖼️ Thumbnails Gallery */}
-          <Stack direction="row" mt={3} flexWrap="wrap">
-            {images.map((img, idx) => (
-              <Box
-                key={idx}
-                onClick={() => setSelectedImage(img)}
-                sx={{
-                  width: 60,
-                  height: 60,
-                  m: 0.5,
-                  borderRadius: 1.5,
-                  overflow: "hidden",
-                  cursor: "pointer",
-                  border:
-                    selectedImage === img
-                      ? "2px solid #1976d2"
-                      : "1px solid #ccc",
-                  transition: "0.2s",
-                  "&:hover": {
-                    border: "2px solid #1976d2",
-                  },
-                }}
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                mt={1}
+                sx={{ lineHeight: 1.6 }}
               >
-                <CardMedia
-                  component="img"
-                  image={img}
-                  alt={`thumb-${idx}`}
+                {description ||
+                  "High-quality product made with attention to detail."}
+              </Typography>
+
+              <Rating
+                value={rating || 4}
+                precision={0.5}
+                readOnly
+                size="small"
+                sx={{ mt: 1 }}
+              />
+            </Box>
+
+            {/* 🖼️ Thumbnails Gallery */}
+            <Stack direction="row" mt={1} flexWrap="wrap">
+              {images.map((img, idx) => (
+                <Box
+                  key={idx}
+                  onClick={() => setSelectedImage(img)}
                   sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
+                    width: 60,
+                    height: 60,
+                    m: 0.5,
+                    borderRadius: 1.5,
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    border:
+                      selectedImage === img
+                        ? "2px solid #1976d2"
+                        : "1px solid #ccc",
+                    transition: "0.2s",
+                    "&:hover": {
+                      border: "2px solid #1976d2",
+                    },
                   }}
-                />
-              </Box>
-            ))}
+                >
+                  <CardMedia
+                    component="img"
+                    image={img}
+                    alt={`thumb-${idx}`}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Box>
+              ))}
+            </Stack>
           </Stack>
+          {/* 🧾 Product Info */}
 
           {/* ⚙️ Actions */}
           <DialogActions sx={{ p: 0, mt: 3 }}>
