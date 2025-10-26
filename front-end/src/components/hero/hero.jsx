@@ -94,7 +94,7 @@ export default function Hero() {
               </Typography>
 
               {/* Free shipping text */}
-              <Typography variant="body2" color="primary" sx={{ mt: 1 }}>
+              <Typography variant="body2"  sx={{ mt: 1 }}>
                 Get free shipping on orders over $99.00
               </Typography>
 
